@@ -19,8 +19,12 @@ help: ## Outputs this help screen
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
 ## —— Docker ————————————————————————————————————
+DOCKER_BUILD = $(DOCKER_COMP) build --pull
 build: ## Builds the Docker images
-	@$(DOCKER_COMP) build --pull
+	@$(DOCKER_BUILD)
+
+rebuild: ## Builds the Docker images without cache
+	@$(DOCKER_BUILD) --no-cache
 
 up: ## Start the docker hub in detached mode (no logs)
 	@$(DOCKER_COMP) up --detach
