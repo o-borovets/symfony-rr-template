@@ -27,6 +27,7 @@ RUN set -eux; \
 	docker-php-ext-configure zip; \
 	docker-php-ext-install -j$(nproc) \
 		intl \
+        sockets \
 		zip \
 	; \
 	pecl install \
@@ -64,7 +65,8 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
-COPY --from=roadrunner /usr/bin/rr /usr/local/bin/local/rr
+COPY ops/docker/php/rr/.rr.yaml /etc/rr/rr.yaml
+COPY --from=roadrunner /usr/bin/rr /usr/local/bin/rr
 
 COPY composer.* symfony.* ./
 RUN set -eux; \
@@ -87,7 +89,7 @@ RUN set -eux; \
     fi
 
 STOPSIGNAL SIGTERM
-CMD ["/usr/local/bin/local/rr", "serve"]
+CMD ["/usr/local/bin/rr", "serve", "-c", "/etc/rr/rr.yaml", "-w", "/srv/app"]
 
 # Dev image
 FROM app_php AS app_php_dev
@@ -100,6 +102,7 @@ RUN rm $PHP_INI_DIR/conf.d/app.prod.ini; \
 	mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 COPY ops/docker/php/conf.d/app.dev.ini $PHP_INI_DIR/conf.d/
+COPY ops/docker/php/rr/.rr.dev.yaml /etc/rr/rr.yaml
 
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \

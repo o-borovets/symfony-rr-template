@@ -3,10 +3,11 @@ DOCKER_COMP = docker compose -f docker-compose.yaml -f docker-compose.dev.yaml
 
 # Docker containers
 PHP_CONT = $(DOCKER_COMP) exec php
+PHP_RUN_CONT = $(DOCKER_COMP) run --rm php
 
 # Executables
 PHP      = $(PHP_CONT) php
-COMPOSER = $(PHP_CONT) composer
+COMPOSER = $(PHP_RUN_CONT) composer
 SYMFONY  = $(PHP_CONT) bin/console
 ROAD_RUNNER  = $(PHP_CONT) rr
 
@@ -19,7 +20,7 @@ help: ## Outputs this help screen
 
 ## —— Docker ————————————————————————————————————
 build: ## Builds the Docker images
-	@$(DOCKER_COMP) build --pull --no-cache
+	@$(DOCKER_COMP) build --pull
 
 up: ## Start the docker hub in detached mode (no logs)
 	@$(DOCKER_COMP) up --detach
@@ -32,8 +33,12 @@ down: ## Stop the docker hub
 logs: ## Show live logs
 	@$(DOCKER_COMP) logs --tail=0 --follow
 
-sh: ## Connect to the PHP FPM container
+sh: ## Connect to the PHP container
 	@$(PHP_CONT) sh
+
+run: ## Run the PHP container with command
+	@$(eval c ?=)
+	@$(PHP_RUN_CONT) $(c)
 
 ## —— Composer ————————————————————————————————————
 composer: ## Run composer, pass the parameter "c=" to run a given command, example: make composer c='req symfony/orm-pack'
