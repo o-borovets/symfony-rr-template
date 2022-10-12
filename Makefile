@@ -1,5 +1,8 @@
 # Executables (local)
 DOCKER_COMP = docker compose -f docker-compose.yaml -f docker-compose.dev.yaml
+ifeq (,$(wildcard ./docker-compose.override.yaml))
+    DOCKER_COMP = $(DOCKER_COMP) docker-compose.override.yaml
+endif
 
 # Docker containers
 PHP_CONT = $(DOCKER_COMP) exec php
