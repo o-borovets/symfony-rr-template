@@ -1,7 +1,7 @@
 # Executables (local)
 DOCKER_COMP = docker compose -f docker-compose.yaml -f docker-compose.dev.yaml
-ifeq (,$(wildcard ./docker-compose.override.yaml))
-    DOCKER_COMP = $(DOCKER_COMP) docker-compose.override.yaml
+ifneq (,$(wildcard ./docker-compose.override.yaml))
+    DOCKER_COMP := $(DOCKER_COMP) -f docker-compose.override.yaml
 endif
 
 # Docker containers
@@ -63,3 +63,7 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 
 cc: c=c:c ## Clear the cache
 cc: sf
+
+## —— CodeStyle ——————————————————————————————————
+cs: ## Run code style fixed
+	$(DOCKER_COMP) --profile=csfixer run php_qa-csfixer
