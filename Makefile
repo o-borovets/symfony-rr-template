@@ -65,5 +65,12 @@ cc: c=c:c ## Clear the cache
 cc: sf
 
 ## —— CodeStyle ——————————————————————————————————
-cs: ## Run code style fixed
+cs: ## Run code style check
 	$(DOCKER_COMP) --profile=csfixer run php_qa-csfixer
+
+## —— Static analysis ——————————————————————————————————
+sa: qa_phpstan ## Run code all style checker
+
+sa_qa_phpstan: ## Run PHPStan check
+	@$(eval c ?=)
+	$(DOCKER_COMP) --profile=phpstan run php_qa-phpstan $(c)
