@@ -31,3 +31,11 @@ services:
     volumes:
       - "./:/project"
     command: [phpstan, analyse, src]
+
+  php_qa-psalm:
+    image: jakzal/phpqa:alpine
+    profiles: [ code_quality, phpstan ]
+    working_dir: /project
+    volumes:
+      - "./:/project"
+    command: [psalm]
