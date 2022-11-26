@@ -69,7 +69,7 @@ cs: ## Run code style check
 	$(DOCKER_COMP) --profile=csfixer run php_qa-csfixer
 
 ## —— Static analysis ——————————————————————————————————
-sa: phpstan ## Run code all style checker
+sa: sa_phpstan sa_psalm  ## Run code all style checker
 
 sa_phpstan: ## Run PHPStan check
 	@$(eval c ?=)

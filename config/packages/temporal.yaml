@@ -1,0 +1,2 @@
+temporal_symfony:
+  address: 'temporal:7233'

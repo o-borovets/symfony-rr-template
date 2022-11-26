@@ -13,6 +13,7 @@ WORKDIR /srv/app
 
 RUN apk add --no-cache \
     git \
+    linux-headers \
     ;
 
 RUN set -eux; \
@@ -32,6 +33,7 @@ RUN set -eux; \
 	; \
 	pecl install \
 		apcu \
+        grpc \
 	; \
 	pecl clear-cache; \
 	docker-php-ext-enable \

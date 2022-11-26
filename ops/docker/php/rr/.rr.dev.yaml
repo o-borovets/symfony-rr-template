@@ -6,7 +6,9 @@ server:
   # remove the previous `command` line above and uncomment the line below to use the deprecated command.
   # command: "php bin/console baldinof:roadrunner:worker"
   env:
-    - APP_RUNTIME: Baldinof\RoadRunnerBundle\Runtime\Runtime
+    - APP_RUNTIME: App\Infrastructure\Symfony\Runtime\ChoiceRRRuntime
+    - XDEBUG_MODE: debug
+    - XDEBUG_TRIGGER: yes
 
 http:
   address: 0.0.0.0:8080
@@ -36,3 +38,11 @@ reload:
     http:
       dirs: ["."]
       recursive: true
+
+# Workflow and activity mesh service.
+#
+# Drop this section for temporal feature disabling.
+temporal:
+  address: temporal:7233
+  activities:
+    debug: true
