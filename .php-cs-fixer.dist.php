@@ -12,6 +12,7 @@ return $config->setRules([
         '@PhpCsFixer' => true,
         '@PhpCsFixer:risky' => true,
         'strict_param' => true,
+        'declare_strict_types' => true,
         'array_syntax' => ['syntax' => 'short'],
     ])
     ->setFinder($finder)

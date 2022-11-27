@@ -15,14 +15,22 @@ services:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
 
-# Quality tools
+  # Quality tools
   php_qa-csfixer:
     image: jakzal/phpqa:alpine
-    profiles: [code_quality, csfixer]
+    profiles: [ code_quality, csfixer ]
     working_dir: /project
     volumes:
       - "./:/project"
-    command: [php-cs-fixer, fix, --allow-risky=yes, --dry-run]
+    command: [ php-cs-fixer, fix, --allow-risky=yes, -vvv ]
+
+  php_qa-csfixer_check:
+    image: jakzal/phpqa:alpine
+    profiles: [ code_quality, csfixer ]
+    working_dir: /project
+    volumes:
+      - "./:/project"
+    command: [ php-cs-fixer, fix, --allow-risky=yes, --dry-run ]
 
   php_qa-phpstan:
     image: jakzal/phpqa:alpine
@@ -30,7 +38,7 @@ services:
     working_dir: /project
     volumes:
       - "./:/project"
-    command: [phpstan, analyse, src]
+    command: [ phpstan, analyse, src ]
 
   php_qa-psalm:
     image: jakzal/phpqa:alpine
@@ -38,4 +46,4 @@ services:
     working_dir: /project
     volumes:
       - "./:/project"
-    command: [psalm]
+    command: [ psalm ]
