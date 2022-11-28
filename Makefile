@@ -75,6 +75,10 @@ sa_phpstan: ## Run PHPStan check
 	@$(eval c ?=)
 	$(DOCKER_COMP) --profile=phpstan run php_qa-phpstan $(c)
 
-sa_psalm: ## Run PHPStan check
+sa_psalm: ## Run Psalm check
 	@$(eval c ?=)
-	$(DOCKER_COMP) --profile=phpstan run php_qa-psalm $(c)
+	$(DOCKER_COMP) --profile=psalm run php_qa-psalm $(c)
+
+sa_rector: ## Run Rector
+	@$(eval c ?=)
+	$(DOCKER_COMP) --profile=rector run php_qa-rector $(c)

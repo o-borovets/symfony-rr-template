@@ -18,7 +18,7 @@ services:
   # Quality tools
   php_qa-csfixer:
     image: jakzal/phpqa:alpine
-    profiles: [ code_quality, csfixer ]
+    profiles: [ code_quality_fixer, csfixer ]
     working_dir: /project
     volumes:
       - "./:/project"
@@ -26,11 +26,27 @@ services:
 
   php_qa-csfixer_check:
     image: jakzal/phpqa:alpine
-    profiles: [ code_quality, csfixer ]
+    profiles: [ code_quality, csfixer_check ]
     working_dir: /project
     volumes:
       - "./:/project"
     command: [ php-cs-fixer, fix, --allow-risky=yes, --dry-run ]
+
+  php_qa-rector:
+    image: jakzal/phpqa:alpine
+    profiles: [ code_quality, rector ]
+    working_dir: /project
+    volumes:
+      - "./:/project"
+    command: [ rector ]
+
+  php_qa-rector_check:
+    image: jakzal/phpqa:alpine
+    profiles: [ code_quality, rector_check]
+    working_dir: /project
+    volumes:
+      - "./:/project"
+    command: [ rector, --dry-run ]
 
   php_qa-phpstan:
     image: jakzal/phpqa:alpine
@@ -42,7 +58,7 @@ services:
 
   php_qa-psalm:
     image: jakzal/phpqa:alpine
-    profiles: [ code_quality, phpstan ]
+    profiles: [ code_quality, psalm ]
     working_dir: /project
     volumes:
       - "./:/project"
