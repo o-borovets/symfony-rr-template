@@ -31,7 +31,9 @@ RUN set -eux; \
         sockets \
 		zip \
 	; \
-	pecl install \
+    # Here only half of the available cores are used since with all cores very often there is not enough memory \
+    # TODO set the number of cores to use via ARGs
+	MAKEFLAGS="-j $(($(nproc) / 2))" pecl install \
 		apcu \
         grpc \
 	; \
