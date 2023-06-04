@@ -3,30 +3,25 @@
     "license": "proprietary",
     "minimum-stability": "stable",
     "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "path",
-            "url": "/srv/lib/symfony-runtime-lib"
-        }
-    ],
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "baldinof/roadrunner-bundle": "^2.2",
         "o-borovets/temporal-symfony": "dev-main",
-        "symfony/console": "6.1.*",
-        "symfony/dotenv": "6.1.*",
+        "symfony/console": "6.3.*",
+        "symfony/dotenv": "6.3.*",
         "symfony/flex": "^2",
-        "symfony/framework-bundle": "6.1.*",
-        "symfony/runtime": "6.1.*",
-        "symfony/yaml": "6.1.*"
+        "symfony/framework-bundle": "6.3.*",
+        "symfony/runtime": "6.3.*",
+        "symfony/yaml": "6.3.*"
     },
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "ergebnis/composer-normalize": true
         },
         "optimize-autoloader": true,
         "preferred-install": {
@@ -71,10 +66,15 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.1.*"
+            "require": "6.3.*"
+        },
+        "composer-normalize": {
+            "indent-size": 2,
+            "indent-style": "space"
         }
     },
     "require-dev": {
+        "ergebnis/composer-normalize": "^2.31",
         "phpstan/phpstan": "^1.9",
         "rector/rector": "^0.14.8"
     }
