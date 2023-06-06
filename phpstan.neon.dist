@@ -10,5 +10,8 @@ parameters:
   level: 9
   paths:
     - src
+  ignoreErrors:
+    - "#Class Symfony.+ is not an Attribute class#"
+
 #  strictRules:
 #    allRules: true

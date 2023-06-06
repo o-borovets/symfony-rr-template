@@ -14,6 +14,7 @@ return $config->setRules([
         'strict_param' => true,
         'declare_strict_types' => true,
         'array_syntax' => ['syntax' => 'short'],
+        'concat_space' => ['spacing' => 'one']
     ])
     ->setFinder($finder)
 ;
