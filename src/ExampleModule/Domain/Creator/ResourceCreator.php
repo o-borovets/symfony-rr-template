@@ -13,7 +13,7 @@ class ResourceCreator implements ResourceCreatorInterface
     {
     }
 
-    public function handle(ResourceCreateData $createData): Resource
+    public function handle(ResourceCreateCommand $createData): Resource
     {
         $resource = new Resource(
             $createData->name,

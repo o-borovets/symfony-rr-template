@@ -2,7 +2,7 @@
 
 namespace App\ExampleModule\Domain\Creator;
 
-final readonly class ResourceCreateData
+final readonly class ResourceCreateCommand
 {
     public function __construct(
         public string $name,
