@@ -14,7 +14,9 @@ return static function (RoutingConfigurator $routes) : void {
         exclude: [
             '**/routes.php',
             '**/*Request*',
+            '**/*Payload*',
             '**/*Response*',
+            '**/*Query*',
             '**/*services*',
         ]
     );
