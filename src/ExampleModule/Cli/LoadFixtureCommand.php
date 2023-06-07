@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\ExampleModule\Cli;
 
 use App\ExampleModule\Infrastructure\Fixtures\ResourceDataLoader;
@@ -24,6 +26,8 @@ class LoadFixtureCommand extends Command
             $this->dataLoader->load();
         } catch (\Throwable $throwable) {
             $output->writeln(['Error occurs:', $throwable->getMessage()]);
+
+            return Command::FAILURE;
         }
 
         $output->writeln('Resource successfully loaded');
