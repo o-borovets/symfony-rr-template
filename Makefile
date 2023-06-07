@@ -66,19 +66,19 @@ cc: sf
 
 ## —— CodeStyle ——————————————————————————————————
 cs: ## Run code style check
-	$(DOCKER_COMP) --profile=csfixer run php_qa-csfixer
+	$(DOCKER_COMP) --profile=csfixer run --rm php_qa-csfixer
 
 ## —— Static analysis ——————————————————————————————————
 sa: sa_phpstan sa_psalm  ## Run code all style checker
 
 sa_phpstan: ## Run PHPStan check
 	@$(eval c ?=)
-	$(DOCKER_COMP) --profile=phpstan run php_qa-phpstan $(c)
+	$(DOCKER_COMP) --profile=phpstan run --rm php_qa-phpstan $(c)
 
 sa_psalm: ## Run Psalm check
 	@$(eval c ?=)
-	$(DOCKER_COMP) --profile=psalm run php_qa-psalm $(c)
+	$(DOCKER_COMP) --profile=psalm run --rm php_qa-psalm $(c)
 
 sa_rector: ## Run Rector
 	@$(eval c ?=)
-	$(DOCKER_COMP) --profile=rector run php_qa-rector $(c)
+	$(DOCKER_COMP) --profile=rector run --rm php_qa-rector $(c)
