@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $container) : void {
+return static function (ContainerConfigurator $container): void {
     // default configuration for services in *this* file
     $services = $container->services()
         ->defaults()
@@ -20,7 +20,7 @@ return static function (ContainerConfigurator $container) : void {
             '**/*Response*',
             '**/*{DTO,Dto}*',
             '**/*routes*',
-            '**/*services*'
+            '**/*services*',
         ])
     ;
     // order is important in this file because service definitions

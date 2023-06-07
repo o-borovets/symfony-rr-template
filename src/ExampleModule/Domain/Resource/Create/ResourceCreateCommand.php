@@ -1,6 +1,8 @@
 <?php
 
-namespace App\ExampleModule\Domain\Creator;
+declare(strict_types=1);
+
+namespace App\ExampleModule\Domain\Resource\Create;
 
 final readonly class ResourceCreateCommand
 {
@@ -8,7 +10,6 @@ final readonly class ResourceCreateCommand
         public string $name,
         public string $value,
         public ?string $id = null,
-    )
-    {
+    ) {
     }
 }

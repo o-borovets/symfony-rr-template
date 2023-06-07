@@ -1,6 +1,8 @@
 <?php
 
-namespace App\ExampleModule\Domain\Creator;
+declare(strict_types=1);
+
+namespace App\ExampleModule\Domain\Resource\Create;
 
 use App\ExampleModule\Domain\Resource\Resource;
 use App\ExampleModule\Domain\Resource\ResourceRepositoryInterface;
@@ -9,8 +11,7 @@ class ResourceCreator implements ResourceCreatorInterface
 {
     public function __construct(
         private readonly ResourceRepositoryInterface $repository
-    )
-    {
+    ) {
     }
 
     public function handle(ResourceCreateCommand $createData): Resource
