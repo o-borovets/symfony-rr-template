@@ -1,6 +1,8 @@
 <?php
 
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
+use Rector\CodingStyle\Rector\Catch_\CatchExceptionNameMatchingTypeRector;
+use Rector\CodingStyle\Rector\ClassMethod\UnSpreadOperatorRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\Config\RectorConfig;
 use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
@@ -36,10 +38,12 @@ return function (RectorConfig $rectorConfig) {
 
     $rectorConfig->skip([
         CompleteDynamicPropertiesRector::class => [
-            __DIR__ . 'src/System/Infrastructure/HealthCheck/services.php:1',
+            __DIR__ . '/src/System/Infrastructure/Symfony/Kernel.php',
         ],
         EncapsedStringsToSprintfRector::class,
-        ClassPropertyAssignToConstructorPromotionRector::class,
-        ReadOnlyPropertyRector::class,
+        ClassPropertyAssignToConstructorPromotionRector::class, // it breaks Doctrine entities and other hydrators that use newInstanceWithoutConstructor
+        ReadOnlyPropertyRector::class, // breaks Doctrine proxies
+        UnSpreadOperatorRector::class,
+        CatchExceptionNameMatchingTypeRector::class,
     ]);
 };
