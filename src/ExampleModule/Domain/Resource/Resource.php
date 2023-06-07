@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace App\ExampleModule\Domain\Resource;
 
+use Symfony\Component\Uid\Uuid;
+
 class Resource
 {
-    private readonly string $id;
+    private Uuid $id;
 
     private string $name;
 
     private string $value;
 
-
-    public function __construct(string $name, string $value, string $id = null)
+    public function __construct(Uuid $id, string $name, string $value)
     {
-        $this->id = $id ?? bin2hex(random_bytes(24));
+        $this->id = $id;
         $this->name = $name;
         $this->value = $value;
     }
 
-    public function getId(): string
+    public function getId(): Uuid
     {
         return $this->id;
     }

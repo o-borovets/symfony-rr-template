@@ -16,9 +16,9 @@ return static function (ContainerConfigurator $container): void {
     $services
         ->load('App\ExampleModule\\', './')
         ->exclude([
-            '**/*Request*',
+            '**/*{Request,Payload,Query}*',
             '**/*Response*',
-            '**/*{DTO,Dto}*',
+            '**/*{DTO,Dto,Command}*',
             '**/*routes*',
             '**/*services*',
         ])

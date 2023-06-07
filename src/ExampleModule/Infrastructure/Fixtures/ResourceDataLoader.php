@@ -6,6 +6,7 @@ namespace App\ExampleModule\Infrastructure\Fixtures;
 
 use App\ExampleModule\Domain\Resource\Create\ResourceCreateCommand;
 use App\ExampleModule\Domain\Resource\Create\ResourceCreatorInterface;
+use Symfony\Component\Uid\Uuid;
 
 class ResourceDataLoader // TODO implements fixture loader interface
 {
@@ -16,16 +17,16 @@ class ResourceDataLoader // TODO implements fixture loader interface
 
     public function load(): void
     {
-        $data = require __DIR__.'/resource_data.php';
+        $data = require __DIR__ . '/resource_data.php';
 
         foreach ($data as $createData) {
             $createCommand = new ResourceCreateCommand(
                 $createData['name'],
                 $createData['value'],
-                $createData['id'] ?? null,
+                $createData['id'] ?? Uuid::v7(),
             );
 
-            $resource = $this->resourceCreator->handle($createCommand);
+            $this->resourceCreator->handle($createCommand);
         }
     }
 }
