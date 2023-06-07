@@ -20,17 +20,9 @@ class ResourceCreateController
 
     #[Route(path: '/api/v1/resources', methods: ['POST'])]
     public function __invoke(
-        #[MapRequestPayload] ResourceCreatePayload $payload,
+        #[MapRequestPayload] ResourceCreateCommand $command,
     ): Response {
-        // do we really need abstraction about different DTO for http and domain layer?
-        // maybe it worth to reduce abstraction level?
-        $createData = new ResourceCreateCommand(
-            $payload->name,
-            $payload->value,
-            $payload->id
-        );
-
-        $this->resourceCreator->handle($createData);
+        $this->resourceCreator->handle($command);
 
         return new Response('', Response::HTTP_NO_CONTENT);
     }
