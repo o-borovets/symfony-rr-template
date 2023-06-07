@@ -6,7 +6,7 @@ server:
   # remove the previous `command` line above and uncomment the line below to use the deprecated command.
   # command: "php bin/console baldinof:roadrunner:worker"
   env:
-    - APP_RUNTIME: App\Infrastructure\Symfony\Runtime\ChoiceRRRuntime
+    - APP_RUNTIME: \App\System\Infrastructure\Symfony\Runtime\ChoiceRRRuntime
     - XDEBUG_MODE: debug
     - XDEBUG_TRIGGER: yes
 
@@ -18,6 +18,8 @@ http:
   static:
     dir: "./public"
     forbid: [ ".php", ".htaccess" ]
+  pool:
+    num_workers: 1
 
 logs:
   mode: development
@@ -25,7 +27,7 @@ logs:
     http:
       level: debug # Log all http requests, set to info to disable
     server:
-      level: info # Everything written to worker stderr is logged
+      level: debug # Everything written to worker stderr is logged
       mode: raw
     metrics:
       level: debug
@@ -39,10 +41,13 @@ reload:
       dirs: ["."]
       recursive: true
 
+rpc:
+  listen: tcp://127.0.0.1:6001
+
 # Workflow and activity mesh service.
 #
 # Drop this section for temporal feature disabling.
-temporal:
-  address: temporal:7233
-  activities:
-    debug: true
+#temporal:
+#  address: temporal:7233
+#  activities:
+#    debug: true
