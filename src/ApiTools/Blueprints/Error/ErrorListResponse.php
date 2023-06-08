@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\ApiTools\Blueprints\Error;
 
 readonly class ErrorListResponse
 {
     /**
-     * @var list<ErrorResponse> $errors
+     * @param array<ErrorResponse> $errors
      */
-    public function __construct(array $errors)
+    public function __construct(public array $errors)
     {
     }
 }
