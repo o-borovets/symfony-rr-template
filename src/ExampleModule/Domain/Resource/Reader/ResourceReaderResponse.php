@@ -1,25 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\ExampleModule\Domain\Resource\Reader;
 
 use App\ApiTools\Blueprints\List\PaginatedListModel;
-use App\ExampleModule\Domain\Resource\Resource;
+use App\ExampleModule\Domain\Resource\Resource as DomainResource;
 
 /**
- * @template-implements PaginatedListModel<ResourceReaderResponseItem>
+ * @template-extends PaginatedListModel<ResourceReaderResponseItem>
  */
 readonly class ResourceReaderResponse extends PaginatedListModel
 {
     /**
-     * @param iterable<Resource> $resources
+     * @param iterable<DomainResource> $resources
      */
     public static function createFromIterable(iterable $resources): self
     {
-        return new self(
-            array_map(
-                static fn(Resource $item) => ResourceReaderResponseItem::fromResource($item),
-                iterator_to_array($resources),
-            ),
-        );
+        $data = [];
+
+        foreach ($resources as $resource) {
+            $data[] = ResourceReaderResponseItem::fromResource($resource);
+        }
+
+        return new self($data);
     }
 }

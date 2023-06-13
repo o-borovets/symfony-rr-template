@@ -24,6 +24,6 @@ class ResourceCreateController
     ): Response {
         $this->resourceCreator->handle($command);
 
-        return new Response('', Response::HTTP_NO_CONTENT);
+        return new Response('', Response::HTTP_CREATED);
     }
 }

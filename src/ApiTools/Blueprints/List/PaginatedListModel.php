@@ -14,7 +14,6 @@ abstract readonly class PaginatedListModel
         public mixed $data,
         public CursorPagination|OffsetPagination|null $meta = null,
         public ?PaginatedListLinks $links = null,
-    )
-    {
+    ) {
     }
 }

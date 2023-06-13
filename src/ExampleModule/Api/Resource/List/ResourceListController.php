@@ -18,15 +18,14 @@ class ResourceListController
     public function __construct(
         private readonly ResourceReaderInterface $reader,
         private readonly SerializerInterface $serializer,
-    )
-    {
+    ) {
     }
 
     #[Route(path: '/api/v1/resources', methods: ['GET'])]
     public function __invoke(
         #[MapQueryString] ResourceReaderQuery $query,
     ): Response {
-        $result = $this->reader->handle($query);
+        $result = $this->reader->list($query);
 
         return new Response($this->serializer->serialize($result, 'json'));
     }

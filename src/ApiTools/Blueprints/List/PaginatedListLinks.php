@@ -11,7 +11,6 @@ readonly class PaginatedListLinks
         public ?string $next = null,
         public ?string $self = null,
         public ?string $related = null,
-    )
-    {
+    ) {
     }
 }

@@ -10,7 +10,6 @@ readonly class CursorPagination
         public int $total,
         public int $current,
         public string $next,
-    )
-    {
+    ) {
     }
 }

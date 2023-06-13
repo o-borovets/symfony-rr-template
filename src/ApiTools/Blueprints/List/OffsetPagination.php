@@ -10,7 +10,6 @@ readonly class OffsetPagination
         public int $total,
         public int $limit,
         public int $offset,
-    )
-    {
+    ) {
     }
 }

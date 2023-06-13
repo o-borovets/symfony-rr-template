@@ -14,7 +14,6 @@ readonly class ErrorResponse
         public string $title,
         public string $detail,
         public array $parameters
-    )
-    {
+    ) {
     }
 }

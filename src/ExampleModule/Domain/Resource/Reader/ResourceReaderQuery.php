@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 final readonly class ResourceReaderQuery
 {
     public function __construct(
-
         // TODO use nested aboject vs put filter directly to query object
         #[Assert\Valid]
         public ?ResourceListQueryFilters $filters,
