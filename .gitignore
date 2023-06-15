@@ -5,7 +5,9 @@
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
-/var/
+/var/*
+!/var/log/.gitkeep
+!/var/.gitkeep
 /vendor/
 ###< symfony/framework-bundle ###
 
@@ -14,3 +16,4 @@
 ###< baldinof/roadrunner-bundle ###
 
 docker-compose.override.yaml
+

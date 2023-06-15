@@ -1,3 +1,11 @@
+SHELL := bash
+.SHELLFLAGS := -euo pipefail -c
+
+OS?=$(shell uname)
+
+MAKEFLAGS += --warn-undefined-variables
+MAKEFLAGS += --no-builtin-rules
+
 # Executables (local)
 DOCKER_COMP = docker compose -f docker-compose.yaml -f docker-compose.dev.yaml
 ifneq (,$(wildcard ./docker-compose.override.yaml))
@@ -17,10 +25,19 @@ ROAD_RUNNER  = $(PHP_CONT) rr
 # Misc
 .DEFAULT_GOAL = help
 
-## —— Makefile ——————————————————————————————————
-help: ## Outputs this help screen
-	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
+# Define common args variable
+ARGS ?=
 
+# bash colors
+RED:=\033[0;31m
+GREEN:=\033[0;32m
+YELLOW:=\033[0;33m
+NO_COLOR:=\033[0m
+
+help:
+	@awk 'BEGIN {FS = ":.*##"; printf "\n\033[1mUsage:\033[0m\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-40s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' Makefile .make/*.mk
+
+##@ [Make]
 ## —— Docker ————————————————————————————————————
 DOCKER_BUILD = $(DOCKER_COMP) build --pull
 build: ## Builds the Docker images
@@ -64,21 +81,4 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 cc: c=c:c ## Clear the cache
 cc: sf
 
-## —— CodeStyle ——————————————————————————————————
-cs: ## Run code style check
-	$(DOCKER_COMP) --profile=csfixer run --rm php_qa-csfixer
-
-## —— Static analysis ——————————————————————————————————
-sa: sa_phpstan sa_psalm  ## Run code all style checker
-
-sa_phpstan: ## Run PHPStan check
-	@$(eval c ?=)
-	$(DOCKER_COMP) --profile=phpstan run --rm php_qa-phpstan $(c)
-
-sa_psalm: ## Run Psalm check
-	@$(eval c ?=)
-	$(DOCKER_COMP) --profile=psalm run --rm php_qa-psalm $(c)
-
-sa_rector: ## Run Rector
-	@$(eval c ?=)
-	$(DOCKER_COMP) --profile=rector run --rm php_qa-rector $(c)
+-include .make/*.mk

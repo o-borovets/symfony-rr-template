@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\ExampleModule\Domain\Resource\Reader;
 
-use App\ExampleModule\Domain\Resource\Exception\ResourceNotFound;
 use App\ExampleModule\Domain\Resource\ResourceRepositoryInterface;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 use Symfony\Component\Uid\Uuid;
