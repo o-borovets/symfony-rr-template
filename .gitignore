@@ -1,3 +1,5 @@
+/docker-compose.override.yaml
+/phpstan.neon
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -12,5 +14,3 @@
 ###> baldinof/roadrunner-bundle ###
 /bin/rr
 ###< baldinof/roadrunner-bundle ###
-
-docker-compose.override.yaml

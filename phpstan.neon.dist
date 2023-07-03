@@ -8,7 +8,12 @@ includes:
 
 parameters:
   level: 9
+  tmpDir: var/phpstan
   paths:
     - src
 #  strictRules:
 #    allRules: true
+
+  ## the project root folder can be overridden in the phpstan.neon file
+  # editorUrl: 'phpstorm://open?file=/path/to/your/project/%%relFile%%&line=%%line%%'
+  editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
