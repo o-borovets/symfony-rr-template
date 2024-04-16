@@ -2,17 +2,17 @@
   "license": "proprietary",
   "type": "project",
   "require": {
-    "php": ">=8.2",
+    "php": ">=8.3",
     "ext-ctype": "*",
     "ext-iconv": "*",
     "baldinof/roadrunner-bundle": "^2.2",
     "o-borovets/temporal-symfony": "dev-main",
-    "symfony/console": "6.3.*",
-    "symfony/dotenv": "6.3.*",
+    "symfony/console": "6.3.* || 7.0.*",
+    "symfony/dotenv": "6.3.* || 7.0.*",
     "symfony/flex": "^2",
-    "symfony/framework-bundle": "6.3.*",
-    "symfony/runtime": "6.3.*",
-    "symfony/yaml": "6.3.*"
+    "symfony/framework-bundle": "6.3.* || 7.0.*",
+    "symfony/runtime": "6.3.* || 7.0.*",
+    "symfony/yaml": "6.3.* || 7.0.*"
   },
   "require-dev": {
     "ergebnis/composer-normalize": "^2.31",
@@ -63,7 +63,7 @@
     },
     "symfony": {
       "allow-contrib": false,
-      "require": "6.3.*"
+      "require": "6.3.* || 7.0.*"
     }
   },
   "scripts": {
